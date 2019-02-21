@@ -1,0 +1,149 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset=utf-8 />
+<title>Flat Total Cost Calculator </title>
+<script language="javascript" type="text/javascript">
+
+RateSQFTCalc = function(){
+  var Saleablearea = Number(document.getElementById("One").value);
+  var SQFTRate = Number(document.getElementById("Three").value);
+  var Infracharges = Number(document.getElementById("Nine").value);
+
+  var totalValue1 =  (Infracharges + SQFTRate ) * Saleablearea
+
+  document.getElementById("RateSQFT").value = totalValue1.toFixed(2);
+}
+
+CostofCarpark = function(){
+var Saleablearea = Number(document.getElementById("One").value);
+var SQFTRate = Number(document.getElementById("Three").value);
+var Carparkcost = Number(document.getElementById("Four").value);
+
+var totalValue2 =  (Saleablearea * SQFTRate ) + Carparkcost
+
+document.getElementById("CCP").value = totalValue2.toFixed(2);
+}
+
+UDSCalc = function(){
+  var Saleablearea = Number(document.getElementById("One").value);
+  var UDSpercentage = Number(document.getElementById("Two").value)/100;
+
+  var totalValue =  (Saleablearea * UDSpercentage)
+
+  document.getElementById("UDSValue").value = totalValue.toFixed(2);
+}
+
+Landcost = function(){
+var Saleablearea = Number(document.getElementById("One").value);
+var UDSpercentage = Number(document.getElementById("Two").value)/100;
+var SQFTRate = Number(document.getElementById("Three").value);
+var Carparkcost = Number(document.getElementById("Four").value);
+var Guideline = Number(document.getElementById("Five").value);
+var TNEBCharges = Number(document.getElementById("Six").value);
+var STPCharges = Number(document.getElementById("Seven").value);
+var LDCharges = Number(document.getElementById("Eight").value);
+var Infracharges = Number(document.getElementById("Nine").value);
+var Regcharges = Number(document.getElementById("Ten").value)/100;
+
+
+var totalValue3 =  (Saleablearea * UDSpercentage) * Guideline
+var totalValue4 = (Infracharges + SQFTRate ) * Saleablearea + Carparkcost - totalValue3
+var totalValue5 = (TNEBCharges + totalValue4 + totalValue3 )
+var totalValue6 = (STPCharges + totalValue5 )
+var totalValue7 = (LDCharges + totalValue6 )
+var totalValue8 = (Regcharges * totalValue7) + totalValue7
+
+
+document.getElementById("LCST").value = totalValue3.toFixed(2);
+document.getElementById("CONCST").value = totalValue4.toFixed(2);
+document.getElementById("TNEB").value = totalValue5.toFixed(2);
+document.getElementById("STP").value = totalValue6.toFixed(2);
+document.getElementById("LDC").value = totalValue7.toFixed(2);
+document.getElementById("REG").value = totalValue8.toFixed(2);
+
+
+}
+
+</script> </head>
+<body oncontextmenu="return false">
+<form>
+    <h2>Flat Calculator</h2>
+    <p>
+<style type="text/css">
+
+  table#t01 {
+  border: 2.85px solid Green;
+  background-color: Yellow; }
+
+   table#t02 {
+  border: 2.5px solid black;
+  background-color: white; }
+
+   table#t03 {
+  border: 1.25px solid black;
+  background-color: #DDA0DD; }
+
+   table#t04 {
+  border: 1.25px solid black;
+  background-color: #FFFFE0; }
+
+</style>
+    <h2>Cost of Flat including Carpark </h2>
+<table id ="t01">
+    <th> <b>Enter total SQFT of the Flat :</b> <th> <input id="One" /> </th> </th>
+    <th> Enter the Per SQFT Cost : <input id="Three" /> </th>
+    <th> Enter the Carpark Cost : <input id="Four" /> </th>
+    <th> Enter the Per Sqft Infra charges : <input id="Nine" /> </th>
+</table>
+<br>
+    <table id = "t02">
+        <th> Total Cost SQFT =  <input readonly id = "RateSQFT"> </input> </th>
+    <th> <input type="button" onClick="RateSQFTCalc()" value="RateSQFT" /> </input> </th>
+    <th> Total Cost of Flat including Car Park  =  <input readonly id = "CCP"></input> </th>
+        <th> <input type="button" onClick="CostofCarpark()" value="CCP" /> </th>
+         <th> Total Construction cost =  <input readonly id = "CONCST"></input> </th>
+           <th> <input type="button" onClick="Landcost()" value="Know your ConCost" /></th>
+        </table>
+  <br>
+    <fieldset>
+      <legend> <H3>UDS Calculation </H3> </legend>
+        <table id ="t03">
+        <th> Enter the value for UDS % : <input id="Two" /> </th>
+               <th> Total UDS value in SQFT =  <input readonly id = "UDSValue"> </input> </th>
+        <th> <input type="button" onClick="UDSCalc()" value="Know your UDS" /></th>
+        </table>
+     <table id = "t03">
+    <th> Enter the value for Guidline Value: <input id="Five" /> </th>
+           <th> Total Land cost of UDS  =  <input readonly id = "LCST"></input> </th>
+           <th> <input type="button" onClick="Landcost()" value="Know your Land Cost" /></th>
+    </table>
+        </fieldset>
+        <br>
+     <H3>Other Cost </H3>
+        <table id ="t04">
+            <th> Enter the value for TNEBCharges: <input id="Six" /> </th>
+            <th> Total cost of flat including TNEB =  <input readonly id = "TNEB"></input> </th>
+           <th> <input type="button" onClick="Landcost()" value="Know your Flat Cost including TNEB" /></th>
+            </table>
+         <table id ="t04">
+            <th> Enter the value for STPCharges : <input id="Seven" /> </th>
+            <th> Total cost of flat including STP  =  <input readonly id = "STP"></input> </th>
+           <th> <input type="button" onClick="Landcost()" value="Know your Flat Cost including STP " /></th>
+            </table>
+            <table id ="t04">
+            <th> Enter the value for LegalDocument Charges : <input id="Eight" /> </th>
+            <th> Total cost of flat including LDC  =  <input readonly id = "LDC"></input> </th>
+           <th> <input type="button" onClick="Landcost()" value="Know your Flat Cost including LDC " /></th>
+            </table>
+    <br>
+     <table id ="t04">
+          <th> Enter the value for Registration % : <input id="Ten" /> </th>
+            <th> Land Registration Fees  =  <input readonly id = "REG"></input> </th>
+         <th> Total cost of flat including Registration  =  <input readonly id = "TREG"></input> </th>
+           <th> <input type="button" onClick="Landcost()" value="Know your Flat Cost including Registration " /></th>
+            </table>
+    <br>
+
+    </form>
+</body>
+</html>
